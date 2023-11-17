@@ -194,7 +194,7 @@ void EasythreedUI::printButton() {
                 print_key_flag = PF_START;
                 return;                                             // Bail out
             }
-            card.ls();                                              // List all files to serial output
+            card.ls('L');                                              // List all files to serial output
             const uint16_t filecnt = card.countFilesInWorkDir();    // Count printable files in cwd
             if (filecnt == 0) return;                               // None are printable?
             card.selectFileByIndex(filecnt);                        // Select the last file according to current sort options
@@ -229,6 +229,7 @@ void EasythreedUI::printButton() {
         planner.synchronize();                                      // Wait for commands already in the planner to finish
         TERN_(HAS_STEPPER_RESET, disableStepperDrivers());          // Disable all steppers - now!
         print_key_flag = PF_START;                                  // The "Print" button now starts a new print
+        blink_interval_ms = LED_ON;
       }
       break;
   }

@@ -121,6 +121,9 @@ void Backlash::add_correction_steps(const int32_t &da, const int32_t &db, const 
       // This correction reduces the residual error and adds block steps
       if (error_correction) {
         block->steps[axis] += ABS(error_correction);
+        backlash_distance_mm[axis] = ABS(error_correction) / planner.settings.axis_steps_per_mm[axis]; 
+        block->millimeters += SQRT(sq(backlash_distance_mm[axis]));
+
         #if ENABLED(CORE_BACKLASH)
           switch (axis) {
             case CORE_AXIS_1:

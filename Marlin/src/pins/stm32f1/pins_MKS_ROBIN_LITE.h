@@ -38,6 +38,14 @@
 #define DISABLE_JTAG
 
 //
+// EEPROM
+//
+#if NO_EEPROM_SELECTED
+  #define I2C_EEPROM                             // AT24Cxx
+  #define MARLIN_EEPROM_SIZE              0x800  // 2K (24C16)
+#endif
+
+//
 // Limit Switches
 //
 #define X_STOP_PIN                          PC13
@@ -163,7 +171,7 @@
 #define SD_SS_PIN                           PA15
 
 // EXP1 replace LCD with keys for EasyThreeD ET4000+ Mainboard
-#if ENABLED(EASYTHREED_UI)
+#if ENABLED(EASYTHREED_K7_ET4000PLUS)
   #define BTN_HOME                   EXP3_07_PIN  // INPUT_PULLUP (unused)
   #define BTN_FEED                   EXP3_02_PIN  // Run E Forward
   #define BTN_RETRACT                EXP3_03_PIN  // Run E Backward
@@ -172,4 +180,16 @@
   #define BTN_FEED_GND               EXP3_05_PIN  // OUTPUT (LOW)
   #define BTN_RETRACT_GND            EXP3_06_PIN  // OUTPUT (LOW)
   #define EASYTHREED_LED_PIN         EXP3_01_PIN  // Indicator LED
+  #define DEFAULT_PWM_MOTOR_CURRENT { 800, 800, 800 } // 1.05Amp per driver, here is XY, Z and E. This values determined empirically.
+#endif
+#if ENABLED(EASYTHREED_K9_ET4000PLUS)
+  #define BTN_HOME                   EXP3_07_PIN  // INPUT_PULLUP (unused)
+  #define BTN_FEED                   EXP3_02_PIN  // Run E Forward
+  #define BTN_RETRACT                EXP3_03_PIN  // Run E Backward
+  #define BTN_PRINT                  PA11         // Start File Print K9 only
+  #define BTN_HOME_GND               EXP3_08_PIN  // OUTPUT (LOW)
+  #define BTN_FEED_GND               EXP3_05_PIN  // OUTPUT (LOW)
+  #define BTN_RETRACT_GND            EXP3_06_PIN  // OUTPUT (LOW)
+  #define EASYTHREED_LED_PIN         EXP3_01_PIN  // Indicator LED
+  #define DEFAULT_PWM_MOTOR_CURRENT { 800, 800, 800 } // 1.05Amp per driver, here is XY, Z and E. This values determined empirically.
 #endif

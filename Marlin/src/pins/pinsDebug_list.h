@@ -246,6 +246,9 @@
 #if _EXISTS(BTN_RIGHT)
   REPORT_NAME_DIGITAL(__LINE__, BTN_RIGHT)
 #endif
+#if _EXISTS(BTN_PRINT)
+  REPORT_NAME_DIGITAL(__LINE__, BTN_PRINT)
+#endif
 
 //
 // Joystick
